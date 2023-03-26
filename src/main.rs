@@ -14,15 +14,6 @@ struct Cli {
     chat_id: Option<String>,
 }
 
-async fn apply_async<T, U, F, Fut>(x: Option<T>, g: F) -> Option<U>
-where
-    F: Fn(T) -> Fut,
-    Fut: Future<Output = U>,
-    U: Sized,
-{
-    return Some(x.map(|y| g(y))?.await);
-}
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let dote = dotenv::dotenv().ok();
