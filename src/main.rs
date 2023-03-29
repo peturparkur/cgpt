@@ -104,41 +104,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
     return Ok(())
-        // let args = Cli::parse();
-
-        // // Only have save_path if we have an id; otherwise it's none (so we can have empty context)
-        // let save_path = args
-        //     .chat_id
-        //     .as_ref()
-        //     .map(|id| Path::new(&cfg.save_path.clone()).join(id.clone() + ".json"));
-
-        // let token = std::env::var("CGPT_TOKEN").unwrap();
-        // println!("{:?}", &args);
-
-        // let msg = types::Message {
-        //     role: types::Role::User,
-        //     content: args.message,
-        // };
-
-        // // Load historic_conversion or set it to empty
-        // // empty if no save_path OR no save_file
-        // let mut previous_chat = match &save_path {
-        //     Some(p) => tokio::fs::read(&p).await.map_or(vec![], |y| {
-        //         serde_json::from_slice::<Vec<Message>>(&y).unwrap()
-        //     }),
-        //     _ => vec![],
-        // };
-        // previous_chat.push(msg);
-
-        // let answer = chat_gpt(&previous_chat, &token).await.unwrap();
-        // previous_chat.push(TryInto::<Message>::try_into(answer.clone()).unwrap());
-        // println!("ChatGPT: \n{}", &previous_chat.last().unwrap().content);
-
-        // match &save_path {
-        //     Some(p) => save_json(&previous_chat, &p).await.unwrap(),
-        //     _ => (),
-        // };
-        // return Ok(());
 }
 
 async fn save_json<T, P>(content: &T, path: &P) -> Result<(), std::io::Error>
