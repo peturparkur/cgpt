@@ -85,14 +85,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let clap_args = CliArgs::parse();
     let y = match clap_args.command {
         Commands::Checkout { id, prompt } => {
+            // id exists -> chat_id = id
+            // id !exists -> create initial message with given system prompt and id
             confy::store_path(&config_path, Configuration{save_path: cfg.save_path, current_chat: id}).unwrap();
             ()
         },
+        // Attempt to get message history; otherwise create empty history
+        // create message and optionally save message and response into history
         Commands::Message { message, no_save } => {
             let msg = Message{role: types::Role::User, content: message};
             let context: Vec<Message> = vec![];
             ()
         },
+        // Create a single message content with System prompt
+        // Note: Doesn't save message or response
         Commands::Ask { message, prompt } => {
             let msg = Message{role: types::Role::User, content: message};
             let background = prompt
